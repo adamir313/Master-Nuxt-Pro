@@ -10,7 +10,6 @@ export default {
                     title: 'Lesson 1: Introduction to Vue Js',
                     id: 'c1-l1',
                     number: 1,
-                    sourceUrl: '',
                     videoUrl: 'https:',
                     videoId: 684236333,
                     text: 'Authentication and Authorization are neccessary to prevent mismatch vacation. The low power is the unset of different global timeline in the university.'
@@ -28,7 +27,6 @@ export default {
                     title: 'Lesson 3: conclusion',
                     id: 'c1-l3',
                     number: 3,
-                    sourceUrl: '',
                     videoUrl: 'https:',
                     videoId: 686921522,
                     text: 'lorem ipsom castle to need and avoid mode and generation. The low power is the unset of different global timeline in the university. Authentication and Authorization are neccessary to prevent mismatch vacation.'
@@ -96,7 +94,6 @@ export default {
                     title: 'Lesson 2: Tailwind CSS compatibility',
                     id: 'c3-l2',
                     number: 2,
-                    sourceUrl: 'https:',
                     videoUrl: '',
                     videoId: 21554793,
                     text: 'The low power is the unset of different global timeline in the university. Authentication and Authorization are neccessary to prevent mismatch vacation.'
@@ -105,7 +102,6 @@ export default {
                     title: 'Lesson 3: Work with SSR',
                     id: 'c3-l3',
                     number: 3,
-                    sourceUrl: '',
                     videoUrl: 'https:',
                     videoId: 67631486,
                     text: 'The low power is the unset of different global timeline in the university. The low power is the unset of different global timeline in the university. Authentication and Authorization are neccessary to prevent mismatch vacation.'
