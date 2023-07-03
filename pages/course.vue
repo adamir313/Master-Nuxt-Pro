@@ -1,11 +1,12 @@
 <template>
-    <div class="mb-12">
+    <div class="mb-12 flex justify-between items-center w-full">
         <h1 class="text-5xl">
             <span class="font-medium">
                 Course:
-                <span class="font-bold">Mastering Nuxt</span>
+                <span class="font-bold">{{ title }}</span>
             </span>
         </h1>
+        <UserCard/>
     </div>
     <div class="w-full flex flex-row justify-center">
         <div class="w-3/12 mr-4 p-8 bg-white rounded-md min-w-[20ch] flex flex-col">
@@ -23,13 +24,13 @@
                 </NuxtLink>
             </div>
         </div>
-        <div class="w-8/12 p-12 bg-white rounded-md">
+        <div class="w-9/12 p-12 bg-white rounded-md">
             <NuxtPage />
         </div>
     </div>
 </template>
 
 <script setup>
-const chapters = useCourse().chapters;
+const {chapters, title} = useCourse();
 
 </script>

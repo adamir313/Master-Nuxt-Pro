@@ -1,5 +1,5 @@
 export default {
-    title: 'Course Title',
+    title: 'Mastering Nuxt 3',
     chapters: [
         {
             title: 'chapter 1',
