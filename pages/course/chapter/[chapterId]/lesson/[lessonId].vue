@@ -19,57 +19,32 @@
 
 <script setup>
 
-const course = useCourse();
+const course = await useCourse();
 const route = useRoute();
 
-// definePageMeta({
-//     middleware: function ({params}, from) {
+const { chapterId, lessonId } = route.params;
 
-//         const course = useCourse();
-
-//         const chapter = course.chapters.find((
-//             chapter) => chapter.id === params.chapterId);
-
-//         if (!chapter) {
-//             return abortNavigation(
-//                 createError({
-//                     statusCode: 404,
-//                     message: 'Chapter not found!'
-//                 }));
-//         }
-
-//         const lesson = chapter.lessons.find((
-//             lesson) => lesson.id === params.lessonId);
-
-//         if (!lesson) {
-//             return abortNavigation(
-//                 createError({
-//                     statusCode: 404,
-//                     message: 'Lesson not found!'
-//                 }));
-//         }
-//     },
-// });
+const lesson = await useLesson(chapterId, lessonId);
 
 definePageMeta({
-  //middleware: ["auth"]
-   middleware: ['lesson-route-middleware', 'auth']
+    //middleware: ["auth"]
+    middleware: ['lesson-route-middleware', 'auth']
 })
 
 const chapter = computed(() => {
-    return course.chapters.find((
+    return course.value.chapters.find((
         chapter) => chapter.id === route.params.chapterId);
 });
 
 
 
-const lesson = computed(() => {
-    return chapter.value.lessons.find((
-        lesson) => lesson.id === route.params.lessonId);
-});
+// const lesson = computed(() => {
+//     return chapter.value.lessons.find((
+//         lesson) => lesson.id === route.params.lessonId);
+// });
 
 const title = computed(() => {
-    return `${lesson.value.title} - ${course.title}`;
+    return `${lesson.value.title} - ${course.value.title}`;
 });
 
 useHead({
