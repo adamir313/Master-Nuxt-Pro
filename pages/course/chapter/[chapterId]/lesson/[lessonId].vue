@@ -13,14 +13,20 @@
         </div>
         <VideoPlayer v-if="lesson.videoId" :videoId="lesson.videoId" />
         <p class=""> {{ lesson.text }} </p>
-        <LessonCompleteButton :modelValue="isLessonCompleted" @update:modelValue="toggleComplete" />
+        <LessonCompleteButton v-if="user" :modelValue="isCompleted" @update:modelValue="toggleComplete" />
     </div>
 </template>
 
 <script setup>
-
+import { useCourseProgress } from '~/stores/courseProgress';
 const course = await useCourse();
 const route = useRoute();
+
+const user = useSupabaseUser();
+const store = useCourseProgress();
+const { initialize, toggleComplete } = store;
+
+initialize();
 
 const { chapterId, lessonId } = route.params;
 
@@ -36,42 +42,16 @@ const chapter = computed(() => {
         chapter) => chapter.id === route.params.chapterId);
 });
 
-
-
-// const lesson = computed(() => {
-//     return chapter.value.lessons.find((
-//         lesson) => lesson.id === route.params.lessonId);
-// });
-
 const title = computed(() => {
     return `${lesson.value.title} - ${course.value.title}`;
+});
+
+const isCompleted = computed(() => {
+    return store.progress[chapterId]?.[lessonId] || false;
 });
 
 useHead({
     title
 });
-
-const progress = useLocalStorage('progress', []);
-
-const isLessonCompleted = computed(() => {
-    if (!progress.value[chapter.value.number - 1]) {
-        return false;
-    }
-
-    if (!progress.value[chapter.value.number - 1][lesson.value.number - 1]) {
-        return false;
-    }
-
-    return progress.value[chapter.value.number - 1][lesson.value.number - 1];
-});
-
-const toggleComplete = () => {
-    if (!progress.value[chapter.value.number - 1]) {
-        progress.value[chapter.value.number - 1] = [];
-    }
-    console.log(chapter);
-    console.log({ chapter });
-    progress.value[chapter.value.number - 1][lesson.value.number - 1] = !isLessonCompleted.value;
-}
 
 </script>

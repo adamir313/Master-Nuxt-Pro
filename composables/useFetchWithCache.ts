@@ -2,29 +2,30 @@ import { StorageSerializers } from "@vueuse/core";
 
 export default async <T>(url: string) => {
 
-    const runtimeConfig = useRuntimeConfig();
-    const baseUrl = runtimeConfig.public.urlBase;
+    // const runtimeConfig = useRuntimeConfig();
+    // const baseUrl = runtimeConfig.public.urlBase;
+    // const fullUrl = baseUrl + url;
 
-    const fullUrl = baseUrl + url;
     //For cahce
     const cached = useSessionStorage<T>(
-        fullUrl, null, {
+        url, null, {
         serializer: StorageSerializers.object,
     }
     );
 
     if (!cached.value) {
-        const { data, error } = await useFetch<T>(fullUrl, {
+
+        const { data, error } = await useFetch<T>(url, {
             headers: useRequestHeaders(['cookie']),
         });
 
         if (error.value) {
+            console.log(error.value.message);
             throw createError({
                 ...error.value,
                 statusMessage: `Could not fetch data from ${url}`
             });
         }
-
         cached.value = data.value as T;
     }
     else {

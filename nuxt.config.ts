@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  nitro: {
+    prerender: {
+      routes: ['/landing'],
+    },
+  },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -11,13 +16,15 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
+    '@pinia/nuxt',
   ],
   runtimeConfig: {
     // The private keys which are only available server-side
-    apiSecret: '123',
+    stripeSecret: '',
     // Keys within public are also exposed client-side
     public: {
-      urlBase: 'http://localhost:3000'
+      urlBase: 'http://localhost:3000',
+      stripeKey: ''
     }
   }
 });
