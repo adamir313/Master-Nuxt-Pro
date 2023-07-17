@@ -8,11 +8,12 @@ generator client {
 }
 
 model Course {
-    id        Int       @id @default(autoincrement())
-    title     String
-    chapters  Chapter[]
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
+    id             Int              @id @default(autoincrement())
+    title          String
+    chapters       Chapter[]
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    CoursePurchase CoursePurchase[]
 }
 
 model Chapter {
@@ -53,4 +54,15 @@ model LessonProgress {
     updatedAt DateTime @updatedAt
 
     @@unique([lessonIde, userEmail])
+}
+
+model CoursePurchase {
+    id        Int      @id @default(autoincrement())
+    Course    Course   @relation(fields: [courseId], references: [id])
+    courseId  Int
+    userEmail String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    verified  Boolean  @default(false)
+    paymentId String   @unique
 }

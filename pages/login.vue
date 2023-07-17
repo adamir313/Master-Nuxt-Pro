@@ -10,11 +10,11 @@
 
 const course = await useCourse();
 const supabase = useSupabaseAuthClient();
-//const user = useSupabaseUser();
-//const { query } = useRoute();
+const user = useSupabaseUser();
+const { query } = useRoute();
 
 // watchEffect(async () => {
-    
+
 //     if (user.value) {
 //         console.log(query.redirectTo + '');
 //         await navigateTo(query.redirectTo + '', {
@@ -24,11 +24,11 @@ const supabase = useSupabaseAuthClient();
 // });
 
 const login = async () => {
-    //const redirectTo = `${window.location.origin}${query.redirectTo}`;
-    //console.log({redirectTo});
+    const redirectTo = `${window.location.origin}${query.redirectTo}`;
+    console.log({ redirectTo });
     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
-        //options: {redirectTo},
+        options: { redirectTo },
     });
     if (error) {
         console.error(error);

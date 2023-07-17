@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available server-side
     stripeSecret: '',
+    stripeWebhookSecret: '',
     // Keys within public are also exposed client-side
     public: {
       urlBase: 'http://localhost:3000',
